@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1> </h1>
+<div style="width:80%; margin:auto;">
+<div style="background-color: blue;
+  width: 50%;
+  padding: 7px;
+  margin: auto;
+  border-radius: 10px;
+  border: 2px solid black;
+  text-align: center;
+  color: white;
+  font-size: 30px; pt-5px; ">Tasks
+</div>
+  {% if task %}
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for item in task %}
+            <tr>
+                <td>{{item.tasktitle}}</td>
+                <td>{{item.taskDescription}}</td>
+                <td>{% if not task.is_completed %}
+                  Completed
+              {% endif %}
+            </td>
+              </tr>
+            {% endfor %}         
+        </tbody>
+    </table>
+  {% else %}
+    <h3>No Data Available</h3>
+  {% endif %}
+ </div>
+ {% endblock content %}

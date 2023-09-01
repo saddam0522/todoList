@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1> </h1>
+<div style="width:80%; margin:auto;">
+  <div style="background-color: blue;
+  width: 50%;
+  padding: 7px;
+  margin: auto;
+  border-radius: 10px;
+  border: 2px solid black;
+  text-align: center;
+  color: white;
+  font-size: 30px; ">Tasks</div>
+    {% if task %}
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status</th>
+              <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for item in task %}
+            <tr>
+                <td>{{item.tasktitle}}</td>
+                <td>{{item.taskDescription}}</td>
+                <td>{% if not task.is_completed %}
+                  Incomplete
+              {% endif %}</td>
+                <td> 
+                  <a href="{% url 'delete_task' id=item.task_id%}" class="btn btn-danger btn-sm mx-2">Delete</a>
+                  <a href="{% url 'edit_task' id=item.task_id%}" class="btn btn-primary btn-sm mx-2">Edit</a>
+                  <a href="{% url 'complete_task' id=item.task_id%}" class="btn btn-success btn-sm mx-2">Completed</a></td>
+              </tr>
+            {% endfor %}         
+        </tbody>
+      </table>
+      {% else %}
+      <h3>No Data Available</h3>
+      {% endif %}
+ </div>
+  
+{% endblock content %}
